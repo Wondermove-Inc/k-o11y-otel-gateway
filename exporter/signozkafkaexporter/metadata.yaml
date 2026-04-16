@@ -1,0 +1,10 @@
+type: signozkafkaexporter
+
+status:
+  class: exporter
+  stability:
+    beta: [traces, metrics, logs]
+
+tests:
+  skip_lifecycle: true
+  skip_shutdown: true

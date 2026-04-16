@@ -1,0 +1,16 @@
+K-O11y SigNoz OTel Collector
+Copyright 2024 Wondermove Inc.
+
+This project is forked from SigNoz OTel Collector
+(https://github.com/SigNoz/signoz-otel-collector),
+licensed under the Apache License 2.0.
+Copyright SigNoz Inc.
+
+Portions of this software are derived from OpenTelemetry Collector
+(https://github.com/open-telemetry/opentelemetry-collector),
+licensed under the Apache License 2.0.
+Copyright The OpenTelemetry Authors.
+
+Wondermove's custom extensions:
+- License Guard Extension (JWT-based license validation)
+- License Gate Processor (data gating on license status)
