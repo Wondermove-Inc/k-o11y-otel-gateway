@@ -1,6 +1,6 @@
 # K-O11y SigNoz OTel Collector
 
-[한국어](README.ko.md)
+[English](README.md) | [한국어](README.ko.md)
 
 A custom SigNoz OpenTelemetry Collector with JWT-based license validation extensions.
 
