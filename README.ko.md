@@ -4,16 +4,15 @@
 
 # K-O11y OTel Gateway
 
-**엔터프라이즈 배포용 JWT 기반 라이선스 검증이 탑재된 SigNoz OTel Collector 포크.**
+**엔터프라이즈 배포용 JWT 기반 라이선스 검증이 탑재된 OpenTelemetry Collector 배포판.**
 
 [English](README.md) | [한국어](README.ko.md)
 
 [![Project Status: WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![SigNoz Fork](https://img.shields.io/badge/SigNoz%20OTel%20Collector-v0.129.2-orange)](https://github.com/SigNoz/signoz-otel-collector)
 [![Go Version](https://img.shields.io/badge/Go-1.22%2B-00ADD8?logo=go)](https://go.dev/)
 
-[SigNoz OTel Collector v0.129.2](https://github.com/SigNoz/signoz-otel-collector) 포크이며, [OpenTelemetry Collector v0.109.0](https://github.com/open-telemetry/opentelemetry-collector) 기반입니다.
+[OpenTelemetry Collector v0.109.0](https://github.com/open-telemetry/opentelemetry-collector) 기반입니다.
 
 </div>
 
@@ -28,13 +27,13 @@
 - 📊 **Prometheus 메트릭** — 라이선스 상태 및 드롭 현황 4종 내장
 - 🔧 **Pass-through 모드** — 라이선스 미설정 시 투명 통과 (개발/테스트 환경용)
 - 🏢 **멀티테넌트 지원** — 라이선스 claims(`tenant_id`, `contract_id`)를 메트릭 속성으로 노출
-- 📦 **SigNoz 호환 포크** — 업스트림 SigNoz OTel Collector 기능(ClickHouse Exporter, signozspanmetricsprocessor 등) 그대로 유지
+- 📦 **업스트림 호환** — 전체 OTel Collector 기능(ClickHouse Exporter, span metrics processor 등) 그대로 유지
 
 ---
 
 ## 🏗️ 동작 방식
 
-Gateway는 Host 클러스터 최전단, SigNoz/ClickHouse 앞단에 위치합니다. Agent 클러스터에서 들어오는 모든 OTLP 페이로드는 2단계 라이선스 검사를 거칩니다. **License Guard Extension** 이 현재 라이선스 상태를 유지·갱신하고, **License Gate Processor** 가 각 배치마다 그 상태를 확인해 ClickHouse로 전달하거나 드롭 카운터를 증가시키며 폐기합니다.
+Gateway는 Host 클러스터 최전단, ClickHouse 앞단에 위치합니다. Agent 클러스터에서 들어오는 모든 OTLP 페이로드는 2단계 라이선스 검사를 거칩니다. **License Guard Extension** 이 현재 라이선스 상태를 유지·갱신하고, **License Gate Processor** 가 각 배치마다 그 상태를 확인해 ClickHouse로 전달하거나 드롭 카운터를 증가시키며 폐기합니다.
 
 ```mermaid
 flowchart LR
@@ -277,7 +276,7 @@ Apache License 2.0 — [LICENSE](LICENSE) 참조.
 ## 🔗 관련 프로젝트
 
 - **Umbrella**: [k-o11y](https://github.com/Wondermove-Inc/k-o11y) — 전체 스택 개요가 담긴 메타 레포
-- **Server**: [k-o11y-server](https://github.com/Wondermove-Inc/k-o11y-server) — SigNoz 포크 + Core API
+- **Server**: [k-o11y-server](https://github.com/Wondermove-Inc/k-o11y-server) — 관측성 백엔드 + Core API
 - **Install**: [k-o11y-install](https://github.com/Wondermove-Inc/k-o11y-install) — Helm 차트 + Go CLI 설치 도구
 - **OTel Collector**: [k-o11y-otel-collector](https://github.com/Wondermove-Inc/k-o11y-otel-collector) — Agent측 Collector (CRD Processor 포함)
 
@@ -294,7 +293,5 @@ Apache License 2.0 — [LICENSE](LICENSE) 참조.
 <div align="center">
 
 **[Wondermove](https://wondermove.net)가 개발 및 관리합니다**
-
-[SigNoz](https://signoz.io)와 [OpenTelemetry](https://opentelemetry.io) 커뮤니티의 훌륭한 작업에 기반합니다.
 
 </div>

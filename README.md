@@ -4,16 +4,15 @@
 
 # K-O11y OTel Gateway
 
-**SigNoz OTel Collector fork with JWT-based license validation for enterprise distributions.**
+**OpenTelemetry Collector distribution with JWT-based license validation for enterprise.**
 
 [English](README.md) | [한국어](README.ko.md)
 
 [![Project Status: WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![SigNoz Fork](https://img.shields.io/badge/SigNoz%20OTel%20Collector-v0.129.2-orange)](https://github.com/SigNoz/signoz-otel-collector)
 [![Go Version](https://img.shields.io/badge/Go-1.22%2B-00ADD8?logo=go)](https://go.dev/)
 
-Forked from [SigNoz OTel Collector v0.129.2](https://github.com/SigNoz/signoz-otel-collector), based on [OpenTelemetry Collector v0.109.0](https://github.com/open-telemetry/opentelemetry-collector).
+Based on [OpenTelemetry Collector v0.109.0](https://github.com/open-telemetry/opentelemetry-collector).
 
 </div>
 
@@ -28,13 +27,13 @@ Forked from [SigNoz OTel Collector v0.129.2](https://github.com/SigNoz/signoz-ot
 - 📊 **Prometheus Metrics** — 4 built-in metrics for license health and drop accounting
 - 🔧 **Pass-through Mode** — Works transparently without a license for dev/test environments
 - 🏢 **Multi-tenant Aware** — License claims (`tenant_id`, `contract_id`) surfaced as metric attributes
-- 📦 **Drop-in SigNoz Fork** — All upstream SigNoz OTel Collector features (ClickHouse exporter, signozspanmetricsprocessor, etc.) retained
+- 📦 **Upstream compatible** — Full OTel Collector features (ClickHouse exporter, span metrics processor, etc.) retained
 
 ---
 
 ## 🏗️ How It Works
 
-The gateway sits at the edge of the Host cluster, in front of SigNoz/ClickHouse. Every OTLP payload from Agent clusters passes through a two-stage license check: the **License Guard Extension** holds and refreshes the current license state, and the **License Gate Processor** consults that state on each batch, either forwarding to ClickHouse or dropping with a counter increment.
+The gateway sits at the edge of the Host cluster, in front of ClickHouse. Every OTLP payload from Agent clusters passes through a two-stage license check: the **License Guard Extension** holds and refreshes the current license state, and the **License Gate Processor** consults that state on each batch, either forwarding to ClickHouse or dropping with a counter increment.
 
 ```mermaid
 flowchart LR
@@ -277,7 +276,7 @@ Forked from [SigNoz OTel Collector](https://github.com/SigNoz/signoz-otel-collec
 ## 🔗 Related
 
 - **Umbrella**: [k-o11y](https://github.com/Wondermove-Inc/k-o11y) — meta-repo with the full stack overview
-- **Server**: [k-o11y-server](https://github.com/Wondermove-Inc/k-o11y-server) — SigNoz fork + Core API
+- **Server**: [k-o11y-server](https://github.com/Wondermove-Inc/k-o11y-server) — Observability backend + Core API
 - **Install**: [k-o11y-install](https://github.com/Wondermove-Inc/k-o11y-install) — Helm charts + Go CLI installers
 - **OTel Collector**: [k-o11y-otel-collector](https://github.com/Wondermove-Inc/k-o11y-otel-collector) — Agent-side collector with CRD Processor
 
@@ -294,7 +293,5 @@ Forked from [SigNoz OTel Collector](https://github.com/SigNoz/signoz-otel-collec
 <div align="center">
 
 **Built and maintained by [Wondermove](https://wondermove.net)**
-
-Based on the incredible work of [SigNoz](https://signoz.io) and the [OpenTelemetry](https://opentelemetry.io) community.
 
 </div>
