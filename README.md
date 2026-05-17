@@ -250,6 +250,42 @@ go test ./processor/licensegateprocessor/...
 
 ---
 
+## Troubleshooting
+
+### Invalid signature / `signature verification failed`
+
+**Symptom:** Gateway logs `JWT verification failed` or `signature verification failed`.
+
+**Likely cause:** `public_key_pem` does not match the key that signed the license JWT (rotated key, wrong config file, or typo in PEM).
+
+**Fix:** Confirm the PEM in your collector config matches the issuer’s current public key; redeploy after updating `license_guard.public_key_pem`.
+
+### Expired license / grace period
+
+**Symptom:** Warnings about license expiring, then `License expired — grace period active`, eventually `data ingestion stopped`.
+
+**Likely cause:** JWT `exp` is in the past. After `grace_period_days` (default 7), the license gate stops forwarding telemetry.
+
+**Fix:** Renew the license JWT before grace ends. Check `otel_license_expires_in_days` and gateway logs for `grace_days_remaining`.
+
+### Missing license key (pass-through mode)
+
+**Symptom:** Log line `License guard running in pass-through mode (no license key configured)`; telemetry is not dropped for licensing.
+
+**Likely cause:** Neither `license_key` nor the env var named in `license_key_env` is set.
+
+**Fix:** Set `license_key` in config or export the JWT to the env var referenced by `license_key_env` (see your Helm values / collector YAML).
+
+### License key parse errors
+
+**Symptom:** `unexpected signing method`, `invalid token`, `tenant_id is missing`, or `exp claim is missing`.
+
+**Likely cause:** Malformed JWT, wrong algorithm (must be RS256), or incomplete claims.
+
+**Fix:** Ensure the license is a single-line RS256 JWT string with `tenant_id` and `exp` claims as issued by your license provider.
+
+---
+
 ## 🤝 Contributing
 
 K-O11y OTel Gateway is part of the broader [K-O11y](https://github.com/Wondermove-Inc/k-o11y) project.
